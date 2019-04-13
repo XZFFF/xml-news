@@ -10,6 +10,7 @@ namespace app\panel\controller;
 
 use app\panel\model\ListsModel;
 use app\panel\model\NewsModel;
+use app\panel\model\ViewsModel;
 use app\panel\validate\PanelValidate;
 use think\facade\Session;
 
@@ -53,6 +54,7 @@ class News extends Base
         $input_data = input('post.aoData');
         $aoData = json_decode($input_data);
         $news_model = new NewsModel();
+        $views_model = new ViewsModel();
         $offset = 0;
         $limit = 10;
         foreach ($aoData as $key => $val) {
@@ -75,8 +77,8 @@ class News extends Base
             } else {
                 $value['is_show'] = '待发布';
             }
-            // TODO 加入view的查询
-            $value['view'] = 5;
+            // 加入view的查询
+            $value['view'] = $views_model->get_news_views($value['id'])['data'];
         }
         echo json_encode($resp);
     }

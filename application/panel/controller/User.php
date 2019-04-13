@@ -62,14 +62,15 @@ class User extends Base
         $count = count($user_info['user']);
         $resp['recordsTotal'] = $count;
         $resp['recordsFiltered'] = $count;
-        $resp['data'] = $user_info['user'];
-        foreach ($user_info['data'] as $key => $value) {
-            if ($value['is_show'] == 0) {
-                $value['is_show'] = '正常';
+
+        foreach ($user_info['user'] as $key => $value) {
+            if ($value['status'] == '0') {
+                $user_info['user'][$key]['status'] = '正常';
             } else {
-                $value['is_show'] = '封禁';
+                $user_info['user'][$key]['status'] = '封禁';
             }
         }
+        $resp['data'] = $user_info['user'];
         echo json_encode($resp);
     }
 
