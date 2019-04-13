@@ -59,6 +59,7 @@ class User extends Base
         $xml_model = new XmlModel();
         $content = $xml_model->read_user_xml();
         $user_info = $xml_model->xmlToArray($content);
+        // TODO 分页问题待完善
         $count = count($user_info['user']);
         $resp['recordsTotal'] = $count;
         $resp['recordsFiltered'] = $count;
