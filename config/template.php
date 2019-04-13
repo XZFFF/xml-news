@@ -39,5 +39,6 @@ return [
         '__JS__'     => '/xml-news/public/static/js',
         '__IMG__'    => '/xml-news/public/static/images',
         '__PANEL__'  => '/xml-news/public/index.php/panel',
+        '__UM__'     => '/xml-news/public/umeditor',
     ]
 ];
