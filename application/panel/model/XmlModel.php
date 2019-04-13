@@ -92,8 +92,6 @@ class XmlModel extends Model
         $dom->loadXML($content);
         $root = $dom->documentElement;
 
-        // TODO 检查是否有重新username的用户
-
         $new_user_xml = $dom->createElement('user');
         $root->appendChild($new_user_xml);
         $username_xml = $dom->createElement('username', $username);
@@ -106,6 +104,24 @@ class XmlModel extends Model
         $new_user_xml->appendChild($status_xml);
 
         $content = $dom->saveXML();
+        return $content;
+    }
+
+    public function edit_user_xml($username, $status)
+    {
+        $content = $this->read_user_xml();
+        $dom = new \DOMDocument();
+        $dom->loadXML($content);
+        $root = $dom->documentElement;
+        $users = $root->getElementsByTagName('user');
+        foreach ($users as $key => $val) {
+            $username_xml = $users->item($key)->getElementsByTagName('username')->item(0)->nodeValue;
+            if ($username_xml == $username) {
+                $users->item($key)->getElementsByTagName('status')->item(0)->nodeValue = $status;
+                $content = $dom->saveXML();
+                return $content;
+            }
+        }
         return $content;
     }
 

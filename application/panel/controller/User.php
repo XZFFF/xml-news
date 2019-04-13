@@ -63,7 +63,16 @@ class User extends Base
         $resp['recordsTotal'] = $count;
         $resp['recordsFiltered'] = $count;
         $resp['data'] = $user_info['user'];
-//        dump($resp);exit();
         echo json_encode($resp);
+    }
+
+    public function edit_user_status()
+    {
+        $username = input('get.username');
+        $status = input('get.status');
+        $xml_model = new XmlModel();
+        $content = $xml_model->edit_user_xml($username, $status);
+        $xml_model->write_user_xml($content);
+        MessageBox($username . '用户状态更新成功', -1);
     }
 }
