@@ -30,6 +30,30 @@ class News extends Base
         return $this->fetch();
     }
 
+    public function get_news()
+    {
+        $input_data = input('post.aoData');
+        $aoData = json_decode($input_data);
+        $news_model = new NewsModel();
+        $offset = 0;
+        $limit = 10;
+        foreach ($aoData as $key => $val) {
+            if ($val->name == 'iDisplayStart')
+                $offset = $val->value;
+            if ($val->name == 'iDisplayLength')
+                $limit = $val->value;
+        }
+
+        $news_info = $news_model->get_news($offset, $limit);
+        // 计算总数
+        $news_info_total = $news_model->get_news(0, 0);
+        $resp['recordsTotal'] = count($news_info_total['data']);
+        $resp['recordsFiltered'] = count($news_info_total['data']);
+        $resp['data'] = $news_info['data'];
+        echo json_encode($resp);
+    }
+
+
     public function add_news()
     {
         $req = input('post.');
@@ -50,4 +74,6 @@ class News extends Base
         $news_info = $news_model->add_news($add_data);
         return api_return($news_info['code'], $news_info['msg'], $news_info['data']);
     }
+
+
 }

@@ -27,4 +27,27 @@ class NewsModel extends Model
             return data_return(CODE_ERROR, '数据库异常', $e->getMessage());
         }
     }
+
+    public function get_news($offset, $limit)
+    {
+        try {
+            if ($offset == 0 && $limit == 0) {
+                $lists = $this->where(true)
+                    ->order('publish_time', 'desc')
+                    ->select();
+            } else {
+                $lists = $this->where(true)
+                    ->order('publish_time', 'desc')
+                    ->limit($offset, $limit)->select();
+            }
+
+            if ($lists == false) {
+                return data_return(CODE_ERROR, '获取失败', $this->getError());
+            } else {
+                return data_return(CODE_SUCCESS, '获取成功', $lists);
+            }
+        } catch (\Exception $e) {
+            return data_return(CODE_ERROR, '数据库异常', $e->getMessage());
+        }
+    }
 }
