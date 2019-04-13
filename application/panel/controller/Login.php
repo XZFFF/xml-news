@@ -30,7 +30,7 @@ class Login extends Controller
         $password = $req['password'];
         if ($username == 'xzfff' && $password == '123') {
             $panel_user['username'] = $username;
-            $panel_user['password'] = $password;
+            $panel_user['realname'] = '谢泽丰';
             Session::set('panel_user', $panel_user);
             return api_return(CODE_SUCCESS, '登录成功', $username);
         } else {
