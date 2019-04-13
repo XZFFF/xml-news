@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<user_list>
+    <user>
+        <username>xzfff</username>
+        <password>123</password>
+        <realname>谢泽丰</realname>
+        <status>0</status>
+    </user>
+    <user>
+        <username>zcf</username>
+        <password>123</password>
+        <realname>郑成锋</realname>
+        <status>1</status>
+    </user>
+</user_list>
