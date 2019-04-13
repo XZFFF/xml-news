@@ -24,6 +24,20 @@ class Base extends Controller
             'child' => array()
         ),
         array(
+            'c' => 'list',
+            'a' => 'index',
+            'title' => '栏目管理',
+            'icon' => 'list',
+            'child' => array()
+        ),
+        array(
+            'c' => 'news',
+            'a' => 'index',
+            'title' => '新闻管理',
+            'icon' => 'file-text',
+            'child' => array()
+        ),
+        array(
             'c' => 'user',
             'a' => 'index',
             'title' => '用户管理',
