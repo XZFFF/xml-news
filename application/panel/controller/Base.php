@@ -24,7 +24,7 @@ class Base extends Controller
             'child' => array()
         ),
         array(
-            'c' => 'list',
+            'c' => 'lists',
             'a' => 'index',
             'title' => '栏目管理',
             'icon' => 'list',

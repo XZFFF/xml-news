@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>控制台 - 用户管理 - 编辑新闻栏目</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/sb-admin-2.css" rel="stylesheet">
+    <link href="__FONT__/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="__CSS__/plugins/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="wrapper">
+    <!--顶栏&菜单栏-->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        {include file='layout/toolbar'}
+        {include file='layout/sidebar'}
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">编辑新闻栏目</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">编辑新闻栏目</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <form action="#">
+                                <div class="col-lg-6">
+                                    <input class="form-control" name="lists_id" id="lists_id" type="hidden"
+                                            value="{if !empty($rel)}{$rel.lists_id}{/if}">
+                                    <div class="form-group">
+                                        <label>栏目名称：</label><br/>
+                                        <input class="form-control" name="lists_name" id="lists_name"
+                                               value="{if !empty($rel)}{$rel.lists_name}{/if}">
+                                        <p class="help-block">栏目名不可重复</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>栏目权重：</label>
+                                        <input class="form-control" type="text" name="lists_sort" id="lists_sort"
+                                               value="{if !empty($rel)}{$rel.lists_sort}{/if}"
+                                               oninput="value=value.replace(/[^\d]/g,'')">
+                                        <p class="help-block">权重仅支持数字，数字越大，栏目排序越前</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>栏目状态：</label>
+                                        <select class="form-control" name="lists_is_show" id="lists_is_show">
+                                            <option value="0" {if !empty($rel)}{if $rel.lists_is_show== 0}selected="selected" {/if}{/if}>
+                                            正常
+                                            </option>
+                                            <option value="1" {if !empty($rel)}{if $rel.lists_is_show== 1}selected="selected" {/if}{/if}>
+                                            禁用
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <button type="button" class="btn btn-default">提交</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="__JS__/jquery-1.11.0.js"></script>
+<script src="__JS__/bootstrap.min.js"></script>
+<script src="__JS__/plugins/metisMenu/metisMenu.min.js"></script>
+<script src="__JS__/sb-admin-2.js"></script>
+<script>
+    $("button").click(function () {
+        $.ajax({
+            url: "__PANEL__/lists/edit_lists",
+            type: "post",
+            dataType: "json",
+            data: {
+                lists_id: $("#lists_id").val(),
+                lists_name: $("#lists_name").val(),
+                lists_sort: $("#lists_sort").val(),
+                lists_is_show: $("#lists_is_show option:selected").val()
+            },
+            success: function (data) {
+                if (data.code == 0) {
+                    window.location.href = "__PANEL__/lists/index";
+                    alert(data.msg);
+                    return true;
+                }
+                else {
+                    alert(data.msg);
+                    return false;
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>
