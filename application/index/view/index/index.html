@@ -5,7 +5,25 @@
     <title>Title</title>
 </head>
 <body>
-
+<div id="news_lists"><h2>载入数据</h2></div>
 </body>
 <script src="__JS__/jquery-1.11.0.js"></script>
+<script>
+    $("#news_lists").load()
+    {
+        $.ajax({
+            url: "__INDEX__/index/get_lists",
+            type: "post",
+            dataType: "json",
+            data: {},
+            success: function (data) {
+                if (data.code == 0) {
+                    alert(data.msg);
+                } else if (data.code == -1) {
+                    alert(data.msg);
+                }
+            },
+        });
+    }
+</script>
 </html>
