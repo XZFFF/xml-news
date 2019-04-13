@@ -40,51 +40,24 @@
                                     <div class="form-group">
                                         <label>用户名</label>
                                         <input class="form-control" name="username" id="username" value="">
-                                        <p class="help-block">校园卡号</p>
+                                        <p class="help-block">用户名不可重复</p>
                                     </div>
                                     <div class="form-group">
-                                        <label>部门</label>
-                                        <select class="form-control" name="department" id="department">
-                                            <option value = "">请选择</option>
-                                            <option value="产品">产品</option>
-                                            <option value="设计">设计</option>
-                                            <option value="技术">技术</option>
-                                            <option value="运营">运营</option>
-                                            <option value="新闻">新闻</option>
-                                            <option value="新媒体">新媒体</option>
-                                            <option value="视频">视频</option>
-                                            <option value="摄影">摄影</option>
-                                            <option value="人力">人力</option>
+                                        <label>密码</label>
+                                        <input class="form-control" name="password" id="password" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>真实姓名</label>
+                                        <input class="form-control" name="realname" id="realname" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>用户状态</label>
+                                        <select class="form-control" name="status" id="status">
+                                            <option value="0">请选择</option>
+                                            <option value="0">正常</option>
+                                            <option value="1">禁用</option>
                                         </select>
-                                        <p class="help-block">所属部门</p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>权限</label>
-                                        </br>
-                                        <input type="checkbox" value="adduser" name="role">
-                                        <span>添加后台用户</span>
-                                        <input type="checkbox" value="deluser" name="role">
-                                        <span>删除后台用户</span>
-                                        <input type="checkbox" value="edituser" name="role">
-                                        <span>编辑后台用户</span>
-                                        <input type="checkbox" value="center" name="role">
-                                        <span>应用中心</span>
-                                        </br>
-                                        <input type="checkbox" value="electric" name="role">
-                                        <span>电费管理</span>
-                                        <input type="checkbox" value="user" name="role">
-                                        <span>掌理用户</span>
-                                        <input type="checkbox" value="secondhand" name="role">
-                                        <span>二手集市</span>
-                                        <input type="checkbox" value="lost" name="role">
-                                        <span>失物招领</span>
-                                        </br>
-                                        <input type="checkbox" value="feedback" name="role">
-                                        <span>问题反馈</span>
-                                        <input type="checkbox" value="news" name="role">
-                                        <span>资讯管理</span>
-                                        <input type="checkbox" value="data" name="role">
-                                        <span>数据统计</span>
+                                        <p class="help-block">默认为正常状态</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -105,30 +78,26 @@
 <script src="__JS__/sb-admin-2.js"></script>
 <script>
     $("button").click(function () {
-        var role = new Array();
-        var items = document.getElementsByName("role");
-        for(var i = 0; i < items.length; i++){
-            if(items[i].checked){
-                role.push(items[i].value);
-            } else {
-                role.push(" ");
-            }
-        }
         var username = $("#username").val();
-        var department = $("#department option:selected").val();
-        if(!username){
-            alert("请输入校园卡号");
-        }else if(!department){
-            alert("请选择部门");
-        }else{
+        var password = $("#password").val();
+        var realname = $("#realname").val();
+        var status = $("#status option:selected").val();
+        if (!username) {
+            alert("请输入用户名");
+        } else if (!password) {
+            alert("请设置密码");
+        } else if (!realname) {
+            alert("请输入真实姓名");
+        } else {
             $.ajax({
                 url: "__PANEL__/user/add_user",
                 type: "post",
                 dataType: "json",
                 data: {
-                    username:  username,
-                    department: department,
-                    role:   role,
+                    username: username,
+                    password: password,
+                    realname:realname,
+                    status: status,
                 },
                 success: function (data) {
                     if (data.code == 0) {
