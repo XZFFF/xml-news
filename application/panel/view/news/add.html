@@ -99,7 +99,7 @@
                                         <label>内容</label>
 
                                         <!-- 加载编辑器的容器 -->
-                                        <!--<script id="container" name="news_content" type="text/plain" style="width:700px;height:200px;"></script>-->
+                                        <script id="container" name="news_content" type="text/plain" style="width:700px;height:200px;"></script>
 
                                         <p class="blog_error">博客内容不能为空！</p>
                                         <button type="button" class="btn btn-default">提交</button>
@@ -149,22 +149,22 @@
         var con2 = $("#news_author").val();
         if (con1 != "" && con2 != "") {
             $.ajax({
-                url: "__API__/news/add_news",
+                url: "__PANEL__/news/add_news",
                 type: "post",
                 dataType: "json",
                 data: {
-                    list_id: $("#list_id option:selected").val(),
+                    lists_id: $("#lists_id option:selected").val(),
                     news_title: $("#news_title").val(),
                     news_author: $("#news_author").val(),
                     news_is_show: $("#news_is_show").val(),
                     news_content: UM.getEditor('container').getContent(),
                 },
                 success: function (data) {
-                    if (data.status == 0) {
+                    if (data.code == 0) {
                         window.location.href = "__PANEL__/news/index";
-                        alert(data.message);
-                    } else if (data.status == -1) {
-                        alert(data.message);
+                        alert(data.msg);
+                    } else if (data.code == -1) {
+                        alert(data.msg);
                     }
                 },
             });
