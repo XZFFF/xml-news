@@ -8,9 +8,11 @@
 
 namespace app\panel\controller;
 
+use app\panel\model\XmlModel;
 use app\panel\validate\PanelValidate;
 use think\Controller;
 use think\facade\Session;
+use think\File;
 
 class Login extends Controller
 {
@@ -47,6 +49,14 @@ class Login extends Controller
             $this->redirect('login/index');
         }
     }
+
+    public function check_login()
+    {
+        $xml_model = new XmlModel();
+        $panel_user = $xml_model->find_user_xml('zcf', '123');
+        return api_return($panel_user['code'], $panel_user['msg'], $panel_user['data']);
+    }
+
 }
 
 
