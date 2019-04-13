@@ -30,6 +30,25 @@ class News extends Base
         return $this->fetch();
     }
 
+    public function edit()
+    {
+        $id = input('get.news_id');
+        $lists_model = new ListsModel();
+        $lists_info = $lists_model->get_show_lists();
+        $this->assign('lists_info', $lists_info['data']);
+        $news_model = new NewsModel();
+        $news_info = $news_model->get_the_news($id);
+        $news['lists_id'] = $news_info['data']['lists_id'];
+        $news['news_id'] = $news_info['data']['id'];
+        $news['news_title'] = $news_info['data']['title'];
+        $news['news_author'] = $news_info['data']['author'];
+        $news['news_is_show'] = $news_info['data']['is_show'];
+        $news['news_content'] = base64_encode($news_info['data']['content']);
+//        $news['news_content'] = $news_info['data']['content'];
+        $this->assign('news', $news);
+        return $this->fetch();
+    }
+
     public function get_news()
     {
         $input_data = input('post.aoData');

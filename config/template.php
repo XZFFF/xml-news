@@ -40,5 +40,6 @@ return [
         '__IMG__'    => '/xml-news/public/static/images',
         '__PANEL__'  => '/xml-news/public/index.php/panel',
         '__UM__'     => '/xml-news/public/umeditor',
+        '__UE__'     => '/xml-news/public/ueditor',
     ]
 ];

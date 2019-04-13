@@ -50,4 +50,18 @@ class NewsModel extends Model
             return data_return(CODE_ERROR, '数据库异常', $e->getMessage());
         }
     }
+
+    public function get_the_news($id)
+    {
+        try {
+            $lists = $this->where(['id' => $id])->find();
+            if ($lists == false) {
+                return data_return(CODE_ERROR, '获取失败', $this->getError());
+            } else {
+                return data_return(CODE_SUCCESS, '获取成功', $lists);
+            }
+        } catch (\Exception $e) {
+            return data_return(CODE_ERROR, '数据库异常', $e->getMessage());
+        }
+    }
 }
