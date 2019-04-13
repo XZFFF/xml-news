@@ -65,6 +65,21 @@ class NewsModel extends Model
         }
     }
 
+    public function get_show_news()
+    {
+        try {
+            $news = $this->where(['is_show' => 1])->find();
+            if ($news == false) {
+                return data_return(CODE_ERROR, '获取失败', $this->getError());
+            } else {
+                return data_return(CODE_SUCCESS, '获取成功', $news);
+            }
+        } catch (\Exception $e) {
+            return data_return(CODE_ERROR, '数据库异常', $e->getMessage());
+        }
+    }
+
+
     public function edit_news($id, $update_data)
     {
         try {

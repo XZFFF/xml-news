@@ -68,6 +68,16 @@ class News extends Base
         $resp['recordsTotal'] = count($news_info_total['data']);
         $resp['recordsFiltered'] = count($news_info_total['data']);
         $resp['data'] = $news_info['data'];
+//        dump($news_info['data']);exit();
+        foreach ($news_info['data'] as $key => $value) {
+            if ($value['is_show'] == 1) {
+                $value['is_show'] = '已发布';
+            } else {
+                $value['is_show'] = '待发布';
+            }
+            // TODO 加入view的查询
+            $value['view'] = 5;
+        }
         echo json_encode($resp);
     }
 

@@ -56,6 +56,13 @@ class Lists extends Base
         $resp['recordsTotal'] = count($lists_info_total['data']);
         $resp['recordsFiltered'] = count($lists_info_total['data']);
         $resp['data'] = $lists_info['data'];
+        foreach ($lists_info['data'] as $key => $value) {
+            if ($value['is_show'] == 0) {
+                $value['is_show'] = '正常';
+            } else {
+                $value['is_show'] = '禁用';
+            }
+        }
         echo json_encode($resp);
     }
 
