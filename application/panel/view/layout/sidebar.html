@@ -13,7 +13,7 @@
             {if !empty($value.child)}
             <li>
                 <a href="#">
-                    <!--<i class="fa fa-{$value['icon']} fa-fw"></i>-->
+                    <i class="fa fa-{$value['icon']} fa-fw"></i>
                     {$value.title}<span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
@@ -24,7 +24,7 @@
             </li>
             {else /}
             <li><a href="__PANEL__/{$value['c']}/{$value['a']}">
-                <!--<i class="fa fa-{$value['icon']} fa-fw"></i>-->
+                <i class="fa fa-{$value['icon']} fa-fw"></i>
                 {$value.title}</a>
             </li>
             {/if}
