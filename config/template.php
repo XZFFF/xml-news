@@ -32,4 +32,12 @@ return [
     'taglib_begin' => '{',
     // 标签库标签结束标记
     'taglib_end'   => '}',
+    // 模板参数替换
+    'tpl_replace_string'       => [
+        '__CSS__'    => '/xml-news/public/static/css',
+        '__FONT__'   => '/xml-news/public/static/fonts',
+        '__JS__'     => '/xml-news/public/static/js',
+        '__IMG__'    => '/xml-news/public/static/images',
+        '__PANEL__'  => '/xml-news/public/index.php/iwut_panel',
+    ]
 ];
