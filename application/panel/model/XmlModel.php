@@ -61,28 +61,28 @@ class XmlModel extends Model
     }
 
 
-    public function add_user_xml()
+    public function add_user_xml($username, $password, $realname, $status)
     {
-        $articleList = array(
-            array(
-                'id' => '1234',
-                'create_date' => '333'
-            ),
-        );
-        $html = '';
-        $html .= '<urlset>';
-        foreach ($articleList as $key => $value) {
-            $html .= '<url>';
-            $html .= '<loc>https://www.codelovers.cn/article/' . $value['id'] . '.html</loc>';
-            $html .= '<lastmod>' . $value['create_date'] . '</lastmod>';
-            $html .= '<changefreq>Always</changefreq>';
-            $html .= '<priority>0.8</priority>';
-            $html .= '</url>';
-        }
-        $html .= '</urlset>';
-        //最后一个参数是去掉tp字典的根节点，只输出自己的内容
-        $result = xml($html, 200, [], ['root_node' => 'xml']);
-        return ($result);
+        $content = $this->read_user_xml();
+        $dom = new \DOMDocument();
+        $dom->loadXML($content);
+        $root = $dom->documentElement;
+        //$users = $root->getElementsByTagName('user');
+
+        $new_user_xml = $dom->createElement('user');
+        $root->appendChild($new_user_xml);
+        $username_xml = $dom->createElement('username', $username);
+        $new_user_xml->appendChild($username_xml);
+        $password_xml = $dom->createElement('password', $password);
+        $new_user_xml->appendChild($password_xml);
+        $realname_xml = $dom->createElement('realname', $realname);
+        $new_user_xml->appendChild($realname_xml);
+        $status_xml = $dom->createElement('status', $status);
+        $new_user_xml->appendChild($status_xml);
+
+        $content = $dom->saveXML();
+        $xml_object = xml($content, 200, []); // 格式化xml字符串为对象
+        return ($xml_object);
     }
 
     public function echo_xml($content)

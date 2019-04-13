@@ -51,7 +51,13 @@ class Login extends Controller
             $this->redirect('login/index');
         }
     }
-    
+
+    public function add_user_xml()
+    {
+        $xml_model = new XmlModel();
+        return $xml_model->add_user_xml('hfx', '123', '韩飞翔', 0);
+    }
+
 }
 
 
