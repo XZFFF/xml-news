@@ -108,12 +108,12 @@
             }, {
                 "mData": "username",
                 "mRender": function (data, type, full) {
-                    return "<a href='__PANEL__/User/edit_user_status?status=0&username=" + data + "' target='_self'> 恢复 </a>";
+                    return "<a href='__PANEL__/user/edit_user_status?status=0&username=" + data + "' target='_self'> 恢复 </a>";
                 }
             }, {
                 "mData": "username",
                 "mRender": function (data, type, full) {
-                    return "<a href='__PANEL__/User/edit_user_status?status=1&username=" + data + "' target='_self'> 封禁 </a> ";
+                    return "<a href='__PANEL__/user/edit_user_status?status=1&username=" + data + "' target='_self'> 封禁 </a> ";
                 }
             }],
             "fnServerData": function (sSource, aoData, fnCallback) {

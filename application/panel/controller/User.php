@@ -10,7 +10,6 @@ namespace app\panel\controller;
 
 use app\panel\model\XmlModel;
 use app\panel\validate\PanelValidate;
-use think\Controller;
 use think\facade\Session;
 
 class User extends Base
