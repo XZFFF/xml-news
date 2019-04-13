@@ -43,12 +43,11 @@ class User extends Base
         $username = $req['username'];
         $password = $req['password'];
         $realname = $req['realname'];
-        $status = $req['status'];
-
+        $status = empty($req['status']) ? '0' : $req['status'];
 
         $has_user = $xml_model->has_user_xml($username);
         if ($has_user['code'] == CODE_SUCCESS) {
-            return api_return(CODE_ERROR, '已存在该用户');
+            return api_return(CODE_ERROR, '该用户名已存在，请重新设置用户名');
         }
         $content = $xml_model->add_user_xml($username, $password, $realname, $status);
         $xml_model->write_user_xml($content);
