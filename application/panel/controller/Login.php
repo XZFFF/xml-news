@@ -25,21 +25,23 @@ class Login extends Controller
     {
         $req = input('post.');
         $panel_validate = new PanelValidate();
+        $xml_model = new XmlModel();
         if ($panel_validate->scene('do_login')->check($req) != VALIDATE_PASS) {
             return api_return(CODE_PARAM_ERROR, $panel_validate->getError());
         }
         $username = $req['username'];
         $password = $req['password'];
-        if ($username == 'xzfff' && $password == '123') {
-            $panel_user['username'] = $username;
-            $panel_user['password'] = $password;
-            $panel_user['realname'] = '谢泽丰';
-            $panel_user['status'] = 0;
-            Session::set('panel_user', $panel_user);
-            return api_return(CODE_SUCCESS, '登录成功', $username);
-        } else {
+
+        $login_user = $xml_model->find_user_xml($username, $password);
+        if ($login_user['code'] != CODE_SUCCESS) {
             return api_return(CODE_ERROR, '登录失败');
         }
+        $panel_user['username'] = $username;
+        $panel_user['password'] = $password;
+        $panel_user['realname'] = $login_user['data']['realname'];
+        $panel_user['status'] = $login_user['data']['status'];;
+        Session::set('panel_user', $panel_user);
+        return api_return(CODE_SUCCESS, '登录成功', $username);
     }
 
     public function logout()
@@ -49,14 +51,7 @@ class Login extends Controller
             $this->redirect('login/index');
         }
     }
-
-    public function check_login()
-    {
-        $xml_model = new XmlModel();
-        $panel_user = $xml_model->find_user_xml('zcf', '123');
-        return api_return($panel_user['code'], $panel_user['msg'], $panel_user['data']);
-    }
-
+    
 }
 
 
