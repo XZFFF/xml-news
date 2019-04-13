@@ -37,6 +37,14 @@ class Login extends Controller
             return api_return(CODE_ERROR, '登录失败');
         }
     }
+
+    public function logout()
+    {
+        if (Session::has('panel_user')) {
+            Session::destroy();
+            $this->redirect('login/index');
+        }
+    }
 }
 
 
