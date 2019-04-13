@@ -53,4 +53,17 @@ class User extends Base
         $xml_model->write_user_xml($content);
         return api_return(CODE_SUCCESS, '用户数据添加成功', $username);
     }
+
+    public function get_user_list()
+    {
+        $xml_model = new XmlModel();
+        $content = $xml_model->read_user_xml();
+        $user_info = $xml_model->xmlToArray($content);
+        $count = count($user_info['user']);
+        $resp['recordsTotal'] = $count;
+        $resp['recordsFiltered'] = $count;
+        $resp['data'] = $user_info['user'];
+//        dump($resp);exit();
+        echo json_encode($resp);
+    }
 }

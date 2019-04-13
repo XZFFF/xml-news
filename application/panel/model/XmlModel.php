@@ -114,4 +114,13 @@ class XmlModel extends Model
         $xml_object = xml($content, 200, []); // 格式化xml字符串为对象
         return ($xml_object);
     }
+
+    //将XML转为array
+    function xmlToArray($xml)
+    {
+        //禁止引用外部xml实体
+        libxml_disable_entity_loader(true);
+        $values = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
+        return $values;
+    }
 }
