@@ -22,21 +22,24 @@ class Index extends Controller
     public function get_lists()
     {
         $lists_model = new ListsModel();
-        $lists_info = $lists_model->get_show_lists();
-        return api_return($lists_info['code'], $lists_info['msg'], $lists_info['data']);
-    }
-
-    public function get_lists_news()
-    {
-        $lists_id = input('post.lists_id');
         $news_model = new NewsModel();
         $views_model = new ViewsModel();
-        $news_info = $news_model->get_show_lists_news($lists_id);
-        foreach ($news_info['data'] as $key => $value) {
-            $news_id = $value['id'];
-            $value['view'] = $views_model->get_news_views($news_id)['data'];
+        try {
+            $lists_info = $lists_model->get_show_lists();
+            $resp['data'] = $lists_info['data'];
+            foreach ($resp['data'] as $key => $value) {
+                // 限制了只展示最新的10篇
+                $news_info = $news_model->get_show_lists_news($value['id']);
+                foreach ($news_info['data'] as $key2 => $value2) {
+                    $news_id = $value2['id'];
+                    $value2['view'] = $views_model->get_news_views($news_id)['data'];
+                }
+                $value['news'] = $news_info['data'];
+            }
+            return api_return(CODE_SUCCESS, '数据获取成功', $resp['data']);
+        } catch (\Exception $e) {
+            return data_return(CODE_ERROR, '数据获取失败', $e->getMessage());
         }
-        return api_return($news_info['code'], $news_info['msg'], $news_info['data']);
     }
 
     public function get_news()

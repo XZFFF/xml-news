@@ -17,7 +17,10 @@ class NewsModel extends Model
     public function get_show_lists_news($lists_id)
     {
         try {
-            $news = $this->where(['lists_id' => $lists_id, 'is_show' => 1])->select();
+            $news = $this->where(['lists_id' => $lists_id, 'is_show' => 1])
+                ->limit(0, 10)
+                ->order('publish_time', 'desc')
+                ->select();
             if ($news == false) {
                 return data_return(CODE_ERROR, '获取失败', $this->getError());
             } else {
