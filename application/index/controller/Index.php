@@ -29,7 +29,6 @@ class Index extends Controller
     public function get_lists_news()
     {
         $lists_id = input('post.lists_id');
-//        $lists_id = 2;
         $news_model = new NewsModel();
         $views_model = new ViewsModel();
         $news_info = $news_model->get_show_lists_news($lists_id);
@@ -44,8 +43,9 @@ class Index extends Controller
     {
         $news_id = input('post.news_id');
         $news_model = new NewsModel();
+        $views_model = new ViewsModel();
         $news_info = $news_model->get_show_news($news_id);
-        // TODO 获取浏览量
+        $news_info['data']['view'] = $views_model->get_news_views($news_id)['data'];
         return api_return($news_info['code'], $news_info['msg'], $news_info['data']);
     }
 
