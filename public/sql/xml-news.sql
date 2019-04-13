@@ -22,8 +22,8 @@ USE `xml_news`;
 -- 表的结构 `list`
 --
 
-DROP TABLE IF EXISTS `list`;
-CREATE TABLE IF NOT EXISTS `list` (
+DROP TABLE IF EXISTS `lists`;
+CREATE TABLE IF NOT EXISTS `lists` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '栏目id',
   `name` varchar(255) NOT NULL COMMENT '栏目名称',
   `sort` int(11) NOT NULL COMMENT '栏目权重，从大到小排序',
