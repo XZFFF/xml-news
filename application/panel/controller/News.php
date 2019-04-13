@@ -44,7 +44,6 @@ class News extends Base
         $news['news_author'] = $news_info['data']['author'];
         $news['news_is_show'] = $news_info['data']['is_show'];
         $news['news_content'] = base64_encode($news_info['data']['content']);
-//        $news['news_content'] = $news_info['data']['content'];
         $this->assign('news', $news);
         return $this->fetch();
     }
