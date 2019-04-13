@@ -55,7 +55,14 @@ class Login extends Controller
     public function add_user_xml()
     {
         $xml_model = new XmlModel();
-        return $xml_model->add_user_xml('hfx', '123', '韩飞翔', 0);
+
+        $has_user = $xml_model->has_user_xml('hfx02');
+        if ($has_user['code'] == CODE_SUCCESS) {
+            return api_return(CODE_ERROR, '已存在该用户');
+        }
+        $content = $xml_model->add_user_xml('hfx02', '123', '韩飞翔', 0);
+        $xml_model->write_user_xml($content);
+        return $xml_model->echo_xml($xml_model->read_user_xml());
     }
 
 }
