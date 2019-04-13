@@ -64,4 +64,18 @@ class NewsModel extends Model
             return data_return(CODE_ERROR, '数据库异常', $e->getMessage());
         }
     }
+
+    public function edit_news($id, $update_data)
+    {
+        try {
+            $ok = $this->where(['id' => $id])->update($update_data);
+            if ($ok == false) {
+                return data_return(CODE_ERROR, '更新失败', $this->getError());
+            } else {
+                return data_return(CODE_SUCCESS, '更新成功', $ok);
+            }
+        } catch (\Exception $e) {
+            return data_return(CODE_ERROR, '数据库异常', $e->getMessage());
+        }
+    }
 }

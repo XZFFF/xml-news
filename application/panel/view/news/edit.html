@@ -40,6 +40,8 @@
 
                             <form action="{:url('news/edit_news')}">
                                 <div class="col-lg-6">
+                                    <input class="form-control" name="news_id" id="news_id" type="hidden"
+                                           value="{if !empty($news)}{$news.news_id}{/if}">
                                     <div class="form-group">
                                         <label>新闻栏目</label>
                                         <select class="form-control" name="lists_id" id="lists_id">
@@ -117,5 +119,30 @@
 <script src="__JS__/bootstrap.min.js"></script>
 <script src="__JS__/plugins/metisMenu/metisMenu.min.js"></script>
 <script src="__JS__/sb-admin-2.js"></script>
+<script>
+    $("button").click(function () {
+        $.ajax({
+            url: "__PANEL__/news/edit_news",
+            type: "post",
+            dataType: "json",
+            data: {
+                news_id: $("#news_id").val(),
+                lists_id: $("#lists_id option:selected").val(),
+                news_title: $("#news_title").val(),
+                news_author: $("#news_author").val(),
+                news_is_show: $("#news_is_show").val(),
+                news_content: UE.getEditor('container').getContent()
+            },
+            success: function (data) {
+                if (data.code == 0) {
+                    window.location.href = "__PANEL__/news/index";
+                    alert(data.msg);
+                } else if (data.code == -1) {
+                    alert(data.msg);
+                }
+            },
+        });
+    });
+</script>
 </body>
 </html>

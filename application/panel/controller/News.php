@@ -94,5 +94,27 @@ class News extends Base
         return api_return($news_info['code'], $news_info['msg'], $news_info['data']);
     }
 
+    public function edit_news()
+    {
+        $req = input('post.');
+        $news_model = new NewsModel();
+        $panel_validate = new PanelValidate();
+        if ($panel_validate->scene('edit_news')->check($req) != VALIDATE_PASS) {
+            return api_return(CODE_PARAM_ERROR, $panel_validate->getError());
+        }
+        $id = $req['news_id'];
+
+        $update_data = array(
+            'lists_id' => $req['lists_id'],
+            'title' => $req['news_title'],
+            'author' => $req['news_author'],
+            'is_show' => $req['news_is_show'],
+            'content' => $req['news_content'],
+            'publish_time' => date('Y:m:d H:i:s', time()),
+        );
+        $news_info = $news_model->edit_news($id, $update_data);
+        return api_return($news_info['code'], $news_info['msg'], $news_info['data']);
+    }
+
 
 }
