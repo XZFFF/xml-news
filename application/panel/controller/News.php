@@ -43,6 +43,7 @@ class News extends Base
         $news['news_id'] = $news_info['data']['id'];
         $news['news_title'] = $news_info['data']['title'];
         $news['news_author'] = $news_info['data']['author'];
+        $news['news_summary'] = $news_info['data']['summary'];
         $news['news_is_show'] = $news_info['data']['is_show'];
         $news['news_content'] = base64_encode($news_info['data']['content']);
         $this->assign('news', $news);
@@ -97,6 +98,7 @@ class News extends Base
             'lists_id' => $req['lists_id'],
             'title' => $req['news_title'],
             'author' => $req['news_author'],
+            'summary' => $req['news_summary'],
             'is_show' => $req['news_is_show'],
             'content' => $req['news_content'],
             'publish_time' => date('Y:m:d H:i:s', time()),
@@ -119,6 +121,7 @@ class News extends Base
             'lists_id' => $req['lists_id'],
             'title' => $req['news_title'],
             'author' => $req['news_author'],
+            'summary' => $req['news_summary'],
             'is_show' => $req['news_is_show'],
             'content' => $req['news_content'],
             'publish_time' => date('Y:m:d H:i:s', time()),
