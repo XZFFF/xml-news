@@ -55,7 +55,8 @@
             <div id="post" class="post type-post status-publish format-standard hentry category-life">
 
                 <div class="info">
-                    <a class="category" style="padding-top:3px" href="/xml-news/public/index/index/lists?lists_id={$news_data.lists_id}">{$news_data.lists_name}</a>
+                    <a class="category" style="padding-top:3px"
+                       href="/xml-news/public/index/index/lists?lists_id={$news_data.lists_id}">{$news_data.lists_name}</a>
                 </div>
 
                 <h3 class="title">
@@ -92,19 +93,14 @@
             </div>
             <div id="categories-2" class="widget widget_categories">
                 <h4 class="title text-center">分类目录</h4>
+                {volist name='lists_data' id='lists_data'}
                 <ul>
-                    <li class="cat-item cat-item-46">
-                        <a href="#">Development</a> (3)
-                    </li>
-                    <li class="cat-item cat-item-11">
-                        <a href="#">Software</a> (18)
-                        <ul class="children">
-                            <li class="cat-item cat-item-109">
-                                <a href="#">Linux</a> (2)
-                            </li>
-                        </ul>
+                    <li class="cat-item">
+                        <a href="/xml-news/public/index/index/lists?lists_id={$lists_data.id}">{$lists_data.name}</a>
+                        ({$lists_data.news_num})
                     </li>
                 </ul>
+                {/volist}
             </div>
         </div>
         <!-- #sidebar -->

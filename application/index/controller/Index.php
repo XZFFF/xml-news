@@ -16,7 +16,12 @@ class Index extends Controller
         $views_model = new ViewsModel();
         try {
             // 栏目列表
-            $lists_data = $lists_model->where(['is_show' => 0])->select();
+            $lists_data = $lists_model->where(['is_show' => 0])->order('sort', 'desc')->select();
+            // 查询栏目下的新闻数
+            foreach ($lists_data as $key => $value) {
+                $lists_id = $value['id'];
+                $lists_data[$key]['news_num'] = count($news_model->where(['lists_id' => $lists_id, 'is_show' => 1])->select());
+            }
             $this->assign('lists_data', $lists_data);
 
             // 新闻列表
