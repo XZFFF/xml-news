@@ -50,16 +50,17 @@
         <div id="blog" class="col-sm-offset-1 col-sm-8 col-sm-push-3 col-md-offset-1 col-md-8 col-md-push-3 no-gutter"
              tabindex="-1" role="main">
 
-            <div id="post-776" class="post-776 post type-post status-publish format-standard hentry category-life">
+            <!--新闻数据列表-->
+            {volist name='news_data' id='news_data'}
+            <div id="post" class="post type-post status-publish format-standard hentry category-life">
 
                 <div class="info">
                     <a class="category" style="padding-top:3px" href="#">MyLife</a>
                 </div>
 
                 <h3 class="title">
-                    <a href="#">体测前的不眠之夜，我所失去的与我能得到的。</a>
+                    <a href="#">{$news_data.title}</a>
                 </h3>
-
 
                 <div class="entry-content">
                     <blockquote>
@@ -74,26 +75,25 @@
                     </p>
                 </div>
                 <!-- .entry-content -->
-                <div id="tags">
-                </div>
-
-
             </div>
+            {/volist}
             <!-- #post-## -->
 
-            <div class="pagination-wrap">
-                <ul class="page-numbers">
-                    <li>
-                        <span aria-current="page" class="page-numbers current">1</span>
-                    </li>
-                    <li>
-                        <a class="page-numbers" href="#">2</a>
-                    </li>
-                    <li>
-                        <a class="next page-numbers" href="#">Next »</a>
-                    </li>
-                </ul>
-            </div>
+            <!--分页器-->
+            {$news_page|raw}
+            <!--<div class="pagination-wrap">-->
+                <!--<ul class="page-numbers">-->
+                    <!--<li>-->
+                        <!--<span aria-current="page" class="page-numbers current">1</span>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a class="page-numbers" href="#">2</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a class="next page-numbers" href="#">Next »</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
 
         </div><!-- #blog -->
 

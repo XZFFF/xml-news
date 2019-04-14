@@ -11,6 +11,29 @@ class Index extends Controller
 {
     public function index()
     {
+        $lists_model = new ListsModel();
+        $news_model = new NewsModel();
+        $views_model = new ViewsModel();
+        try {
+            // 栏目列表
+            $lists_data = $lists_model->where(['is_show' => 0])->select();
+            $this->assign('lists_data', $lists_data);
+
+            // 新闻列表
+            $news_data = $news_model->where(['is_show' => 1])->paginate(2);
+            foreach ($news_data->items() as $key => $value) {
+                $lists_id = $value['lists_id'];
+                $news_data->items()[$key]['lists_name'] = $lists_model->field('name')->where(['id' => $lists_id])->find()['name'];
+                $news_id = $value['id'];
+                $news_data->items()[$key]['views'] = $views_model->get_news_views($news_id)['data'];
+            }
+            $news_page = $news_data->render();
+            $this->assign('news_data', $news_data);
+            $this->assign('news_page', $news_page);
+
+        } catch (\Exception $e) {
+            return data_return(CODE_ERROR, '数据获取失败', $e->getMessage());
+        }
         return $this->fetch();
     }
 
