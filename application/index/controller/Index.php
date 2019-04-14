@@ -44,6 +44,42 @@ class Index extends Controller
 
     public function lists()
     {
+        $now_lists_id = input('get.lists_id');
+        $lists_model = new ListsModel();
+        $news_model = new NewsModel();
+        $views_model = new ViewsModel();
+        try {
+            // 栏目名称
+            $lists_name = $lists_model->field('name')->where(['id' => $now_lists_id])->find()['name'];
+            $this->assign('lists_name', $lists_name);
+
+            // 栏目列表
+            $lists_data = $lists_model->where(['is_show' => 0])->order('sort', 'desc')->select();
+            // 查询栏目下的新闻数
+            foreach ($lists_data as $key => $value) {
+                $lists_id = $value['id'];
+                $lists_data[$key]['news_num'] = count($news_model->where(['lists_id' => $lists_id, 'is_show' => 1])->select());
+            }
+            $this->assign('lists_data', $lists_data);
+
+            // 新闻列表
+            $news_data = $news_model->where(['is_show' => 1, 'lists_id' => $now_lists_id])->paginate(2,false,[
+                'query' => request()->param()
+            ]);
+//            dump($news_data);exit();
+            foreach ($news_data->items() as $key => $value) {
+                $lists_id = $value['lists_id'];
+                $news_data->items()[$key]['lists_name'] = $lists_model->field('name')->where(['id' => $lists_id])->find()['name'];
+                $news_id = $value['id'];
+                $news_data->items()[$key]['views'] = $views_model->get_news_views($news_id)['data'];
+            }
+            $news_page = $news_data->render();
+            $this->assign('news_data', $news_data);
+            $this->assign('news_page', $news_page);
+
+        } catch (\Exception $e) {
+            return data_return(CODE_ERROR, '数据获取失败', $e->getMessage());
+        }
         return $this->fetch();
     }
 
