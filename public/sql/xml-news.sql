@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 2019-04-13 17:12:31
+-- Generation Time: 2019-04-14 06:56:48
 -- 服务器版本： 5.6.35
 -- PHP Version: 7.1.1
 
@@ -43,11 +43,12 @@ CREATE TABLE IF NOT EXISTS `news` (
   `lists_id` int(11) NOT NULL COMMENT '所属栏目id',
   `title` varchar(255) NOT NULL COMMENT '标题',
   `author` varchar(64) NOT NULL COMMENT '作者',
+  `summary` text NOT NULL COMMENT '摘要',
   `content` text NOT NULL COMMENT '内容',
   `publish_time` datetime NOT NULL COMMENT '发布时间，排序从近到远',
   `is_show` tinyint(1) NOT NULL COMMENT '是否发布',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='新闻表';
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='新闻表';
 
 -- --------------------------------------------------------
 
@@ -61,4 +62,4 @@ CREATE TABLE IF NOT EXISTS `views` (
   `news_id` int(11) NOT NULL,
   `view_time` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='浏览表';
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='浏览表';
