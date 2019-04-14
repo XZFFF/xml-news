@@ -14,7 +14,12 @@ class Index extends Controller
         return $this->fetch();
     }
 
-    public function detail()
+    public function lists()
+    {
+        return $this->fetch();
+    }
+
+    public function news()
     {
         return $this->fetch();
     }
