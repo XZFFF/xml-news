@@ -63,6 +63,18 @@
                     <a href="/xml-news/public/index/index/news?news_id={$news_data.id}">{$news_data.title}</a>
                 </h3>
 
+                <!--标签数据-->
+                <div class="info">
+                    <span class="fix" style="margin-right: 7px"><i class="fa fa-calendar"></i>
+                        <span class="no-mobile"> 发布：</span>2018-12-11</span>
+                    <span class="fix" style="margin-right: 7px"><i class="fa fa-home"></i>
+                        <span class="no-mobile"> 来源：</span>新闻经纬</span>
+                    <span class="fix" style="margin-right: 7px"><i class="fa fa-user"></i>
+                        <span class="no-mobile"> 作者：</span>{$news_data.author}</span>
+                    <span class="fix" style="margin-right: 7px"><i class="fa fa-globe"></i>
+                        <span class="no-mobile"> 浏览：</span>{$news_data.views}</span>
+                </div>
+
                 <div class="entry-content">
                     <blockquote>{$news_data.summary}</blockquote>
                     <p>
@@ -83,7 +95,8 @@
 
         <div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-9 no-gutter" role="complementary">
             <div id="search-2" class="widget widget_search">
-                <form method="get" id="searchform" class="form-inline" action="http://localhost/xml-news/public/index/index/search" role="search">
+                <form method="get" id="searchform" class="form-inline"
+                      action="http://localhost/xml-news/public/index/index/search" role="search">
                     <div class="form-group">
                         <label for="s" class="sr-only">Search</label>
                         <input type="search" class="form-control" name="keyword" id="s">

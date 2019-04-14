@@ -11,6 +11,7 @@ class Index extends Controller
 {
     public function index()
     {
+        $list_rows = 5;
         $lists_model = new ListsModel();
         $news_model = new NewsModel();
         $views_model = new ViewsModel();
@@ -25,7 +26,7 @@ class Index extends Controller
             $this->assign('lists_data', $lists_data);
 
             // 新闻列表
-            $news_data = $news_model->where(['is_show' => 1])->paginate(2);
+            $news_data = $news_model->where(['is_show' => 1])->paginate($list_rows);
             foreach ($news_data->items() as $key => $value) {
                 $lists_id = $value['lists_id'];
                 $news_data->items()[$key]['lists_name'] = $lists_model->field('name')->where(['id' => $lists_id])->find()['name'];
@@ -45,6 +46,7 @@ class Index extends Controller
     public function lists()
     {
         $now_lists_id = input('get.lists_id');
+        $list_rows = 5;
         $lists_model = new ListsModel();
         $news_model = new NewsModel();
         $views_model = new ViewsModel();
@@ -64,7 +66,7 @@ class Index extends Controller
 
             // 新闻列表
             $news_data = $news_model->where(['is_show' => 1, 'lists_id' => $now_lists_id])
-                ->paginate(2, false, [
+                ->paginate($list_rows, false, [
                     'query' => request()->param()
                 ]);
             foreach ($news_data->items() as $key => $value) {
@@ -117,7 +119,6 @@ class Index extends Controller
     public function search()
     {
         $keyword = input('get.keyword');
-//        dump($keyword);exit();
         $lists_model = new ListsModel();
         $news_model = new NewsModel();
         $views_model = new ViewsModel();
