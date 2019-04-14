@@ -1,0 +1,27 @@
+.navbar-default {
+    background-color: #349bc0;
+}
+
+.widget .title {
+    background-color: #bdc3c7;
+}
+
+body {
+    font-family: Helvetica, Tahoma, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei";
+}
+
+#tags {
+    margin-top: 2px
+}
+
+.footer {
+    height: auto
+}
+
+.navbar-brand {
+    font-size: 20px;
+}
+
+.widget {
+    border-radius: 4px;
+}
