@@ -97,7 +97,8 @@
                                             //     ue.execCommand('insertHtml', news_content);
                                             // });
                                             ue.ready(function () {
-                                                ue.execCommand("insertHtml", window.atob(news_content));
+                                                // ue.execCommand("insertHtml", window.atob(news_content));
+                                                ue.execCommand("insertHtml", decodeURIComponent(news_content));
                                             });
                                         </script>
                                         <!-- 加载编辑器的容器 -->

@@ -58,14 +58,13 @@
 
                         <div class="entry-content">
                             <blockquote><p>
-                                {$news_data.summary}
+                                <p>转载来源: <a href="http://www.wutnews.net">新闻经纬</a></p>
+                                <p>作者: {$news_data.author}</p>
                             </p></blockquote>
                             <!--这里不能使用TP框架的渲染，因为会有htmlentities-->
                             <?php echo $news_data['content'];?>
                         </div><!-- .entry-content -->
-                        <div id="tags">
-                            作者: {$news_data.author}
-                        </div>
+                        <div id="tags"></div>
                     </div>
                 </div><!-- #post-## -->
 
