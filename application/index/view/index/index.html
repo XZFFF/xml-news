@@ -31,7 +31,7 @@
                     <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
                 </button>
 
-                <a class="navbar-brand" href="#">XML新闻网站</a>
+                <a class="navbar-brand" href="http://localhost/xml-news/public/index/">XML新闻网站</a>
             </div>
             <nav id="navbar" class="collapse navbar-collapse navbar-main-navigation" role="navigation">
                 <ul id="menu-navbar" class="nav navbar-nav navbar-right">
@@ -55,21 +55,17 @@
             <div id="post" class="post type-post status-publish format-standard hentry category-life">
 
                 <div class="info">
-                    <a class="category" style="padding-top:3px" href="#">MyLife</a>
+                    <a class="category" style="padding-top:3px" href="/xml-news/public/index/index/lists?lists_id={$news_data.lists_id}">{$news_data.lists_name}</a>
                 </div>
 
                 <h3 class="title">
-                    <a href="#">{$news_data.title}</a>
+                    <a href="/xml-news/public/index/index/news?news_id={$news_data.id}">{$news_data.title}</a>
                 </h3>
 
                 <div class="entry-content">
-                    <blockquote>
-                        <p>
-                            自从学校开始响应号召，严抓考核、降低划水毕业率后，体测便成为了竟能让学生无法毕业的一大障碍。然而在这重要的日子前夜，计划早早上床准备睡觉的我却彻夜未眠。心跳加速、全身发热的我在这辗转反侧的七小时里，想了很多很多。
-                        </p>
-                    </blockquote>
+                    <blockquote>{$news_data.summary}</blockquote>
                     <p>
-                        <a href="#" class="more-link">继续阅读
+                        <a href="/xml-news/public/index/index/news?news_id={$news_data.id}" class="more-link">继续阅读
                             <span class="meta-nav">→</span>
                         </a>
                     </p>
