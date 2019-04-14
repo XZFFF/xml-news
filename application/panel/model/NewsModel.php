@@ -68,7 +68,7 @@ class NewsModel extends Model
     public function get_show_news()
     {
         try {
-            $news = $this->where(['is_show' => 1])->find();
+            $news = $this->where(['is_show' => 1])->select();
             if ($news == false) {
                 return data_return(CODE_ERROR, '获取失败', $this->getError());
             } else {
