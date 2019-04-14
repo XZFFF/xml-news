@@ -57,10 +57,18 @@
                         <h3 class="title" style="margin-top: 8px"><a href="#">{$news_data.title}</a></h3>
 
                         <div class="entry-content">
-                            <blockquote><p>
-                                <p>转载来源: <a href="http://www.wutnews.net">新闻经纬</a></p>
-                                <p>作者: {$news_data.author}</p>
-                            </p></blockquote>
+                            <blockquote>
+                                <div class="info">
+                                    <span class="fix" style="margin-right: 7px"><i class="fa fa-calendar"></i>
+                                        <span class="no-mobile"> 发布：</span>2018-12-11</span>
+                                    <span class="fix" style="margin-right: 7px"><i class="fa fa-home"></i>
+                                        <span class="no-mobile"> 来源：</span>新闻经纬</span>
+                                    <span class="fix" style="margin-right: 7px"><i class="fa fa-user"></i>
+                                        <span class="no-mobile"> 作者：</span>{$news_data.author}</span>
+                                    <span class="fix" style="margin-right: 7px"><i class="fa fa-globe"></i>
+                                        <span class="no-mobile"> 浏览：</span>{$news_data.views}</span>
+                                </div>
+                            </blockquote>
                             <!--这里不能使用TP框架的渲染，因为会有htmlentities-->
                             <?php echo $news_data['content'];?>
                         </div><!-- .entry-content -->

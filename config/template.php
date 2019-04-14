@@ -36,7 +36,7 @@ return [
     'tpl_replace_string' => [
         '__INDEX__' => '/xml-news/public/index.php/index',
         '__INDEX_CSS__' => '/xml-news/public/static/index/css',
-        '__INDEX_FONT__' => '/xml-news/public/static/index/font',
+        '__INDEX_FONT__' => '/xml-news/public/static/index/fonts',
         '__INDEX_JS__' => '/xml-news/public/static/index/js',
         '__INDEX_IMG__' => '/xml-news/public/static/index/images',
 
