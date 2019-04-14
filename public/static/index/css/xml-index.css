@@ -25,3 +25,12 @@ body {
 .widget {
     border-radius: 4px;
 }
+
+.pie {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #FFFFFF;
+    background-color: #333333;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px rgba(0, 0, 0, 25);
+}
