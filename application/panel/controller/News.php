@@ -126,7 +126,7 @@ class News extends Base
             'author' => $req['news_author'],
             'summary' => $req['news_summary'],
             'is_show' => $req['news_is_show'],
-            'content' => $req['news_content'],
+//            'content' => $req['news_content'],
             'publish_time' => date('Y:m:d H:i:s', time()),
         );
         $news_info = $news_model->edit_news($id, $update_data);

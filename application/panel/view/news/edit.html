@@ -84,25 +84,20 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label>内容</label>
-
-                                        <!-- 配置文件 -->
+                                        <p class="help-block">暂不支持编辑</p>
+                                        <!--
                                         <script type="text/javascript" src="/xml-news/public/ueditor/ueditor.config.js"></script>
-                                        <!-- 编辑器源码文件 -->
                                         <script type="text/javascript" src="/xml-news/public/ueditor/ueditor.all.js"></script>
-                                        <!-- 实例化编辑器 -->
                                         <script type="text/javascript">
                                             var ue = UE.getEditor('container');
-                                            var news_content = "{$news.news_content}";
-                                            // ue.addListener('ready',function () {
-                                            //     ue.execCommand('insertHtml', news_content);
-                                            // });
+                                            var news_content = "<?php echo $news['news_content'];?>";
                                             ue.ready(function () {
                                                 // ue.execCommand("insertHtml", window.atob(news_content));
                                                 ue.execCommand("insertHtml", decodeURIComponent(news_content));
                                             });
                                         </script>
-                                        <!-- 加载编辑器的容器 -->
                                         <script id="container" name="content" type="text/plain"></script>
+                                        -->
                                         <button type="button" class="btn btn-default">提交</button>
                                     </div>
                                 </div>
@@ -133,7 +128,7 @@
                 news_author: $("#news_author").val(),
                 news_summary: $("#news_summary").val(),
                 news_is_show: $("#news_is_show").val(),
-                news_content: UE.getEditor('container').getContent()
+                //news_content: UE.getEditor('container').getContent()
             },
             success: function (data) {
                 if (data.code == 0) {

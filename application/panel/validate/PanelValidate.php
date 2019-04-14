@@ -66,7 +66,7 @@ class PanelValidate extends Validate
 
         // 新闻内容
         'add_news' => ['news_title', 'news_author', 'news_content', 'news_is_show'],
-        'edit_news' => ['news_id', 'news_title', 'news_author', 'news_content', 'news_is_show'],
+        'edit_news' => ['news_id', 'news_title', 'news_author', 'news_is_show'],
         'view_news' => ['news_id'],
     ];
 }
