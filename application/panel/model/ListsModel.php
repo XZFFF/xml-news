@@ -14,6 +14,20 @@ class ListsModel extends Model
 {
     protected $table = 'lists';
 
+    public function get_lists_name($lists_id)
+    {
+        try {
+            $lists_name = $this->field('name')->where(['id' => $lists_id])->find()['name'];
+            if ($lists_name == false) {
+                return data_return(CODE_ERROR, '获取失败', $this->getError());
+            } else {
+                return data_return(CODE_SUCCESS, '获取成功', $lists_name);
+            }
+        } catch (\Exception $e) {
+            return data_return(CODE_ERROR, '数据库异常', $e->getMessage());
+        }
+    }
+
     public function get_show_lists()
     {
         try {

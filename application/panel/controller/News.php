@@ -55,6 +55,7 @@ class News extends Base
         $input_data = input('post.aoData');
         $aoData = json_decode($input_data);
         $news_model = new NewsModel();
+        $lists_model = new ListsModel();
         $views_model = new ViewsModel();
         $offset = 0;
         $limit = 10;
@@ -73,6 +74,7 @@ class News extends Base
         $resp['data'] = $news_info['data'];
 //        dump($news_info['data']);exit();
         foreach ($news_info['data'] as $key => $value) {
+            $value['lists_name'] = $lists_model->get_lists_name($value['lists_id'])['data'];
             if ($value['is_show'] == 1) {
                 $value['is_show'] = '已发布';
             } else {
