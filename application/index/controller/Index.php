@@ -114,4 +114,38 @@ class Index extends Controller
         return $this->fetch();
     }
 
+    public function search()
+    {
+        $keyword = input('get.keyword');
+//        dump($keyword);exit();
+        $lists_model = new ListsModel();
+        $news_model = new NewsModel();
+        $views_model = new ViewsModel();
+        try {
+            // 栏目列表
+            $lists_data = $lists_model->where(['is_show' => 0])->order('sort', 'desc')->select();
+            // 查询栏目下的新闻数
+            foreach ($lists_data as $key => $value) {
+                $lists_id = $value['id'];
+                $lists_data[$key]['news_num'] = count($news_model->where(['lists_id' => $lists_id, 'is_show' => 1])->select());
+            }
+            $this->assign('lists_data', $lists_data);
+
+            // 搜索结果-新闻列表
+            $news_data = $news_model->where('is_show', '=', 1)
+                ->where('title|content', 'like', "%{$keyword}%")
+                ->select();
+            foreach ($news_data as $key => $value) {
+                $lists_id = $value['lists_id'];
+                $news_data[$key]['lists_name'] = $lists_model->field('name')->where(['id' => $lists_id])->find()['name'];
+                $news_id = $value['id'];
+                $news_data[$key]['views'] = $views_model->get_news_views($news_id)['data'];
+            }
+            $this->assign('news_data', $news_data);
+
+        } catch (\Exception $e) {
+            return data_return(CODE_ERROR, '数据获取失败', $e->getMessage());
+        }
+        return $this->fetch();
+    }
 }

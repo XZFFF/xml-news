@@ -1,10 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="profile" href="http://gmpg.org/xfn/11"/>
+    <link rel="pingback" href="#"/>
+    <title>XML新闻网站</title>
+    <link rel="stylesheet" href="__INDEX_CSS__/style.css" type="text/css">
+    <link rel="stylesheet" href="__INDEX_CSS__/style.min.css" type="text/css">
+    <link rel="stylesheet" href="__INDEX_CSS__/dark.css" type="text/css">
+    <link rel="stylesheet" href="__INDEX_CSS__/pure-highlight.css" type="text/css">
+    <link rel="stylesheet" href="__INDEX_CSS__/katex.min.css" type="text/css">
+    <link rel="stylesheet" href="__INDEX_CSS__/emojify.min.css" type="text/css">
+    <link rel="stylesheet" href="__INDEX_CSS__/prism-tomorrow.css" type="text/css">
+    <link rel="stylesheet" href="__INDEX_CSS__/prism-toolbar.css" type="text/css">
+    <link rel="stylesheet" href="__INDEX_CSS__/prism-line-numbers.css" type="text/css">
+    <link rel="stylesheet" href="__INDEX_CSS__/xml-index.css" type="text/css">
+    <link rel="stylesheet" href="__INDEX_FONT__/css/font-awesome.min.css" type="text/css">
 </head>
-<body>
+
+<body class="home blog">
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="col-md-12 no-gutter">
+            <div class="navbar-header">
+
+                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+                </button>
+
+                <a class="navbar-brand" href="http://localhost/xml-news/public/index">XML新闻网站</a>
+            </div>
+            <nav id="navbar" class="collapse navbar-collapse navbar-main-navigation" role="navigation">
+                <ul id="menu-navbar" class="nav navbar-nav navbar-right">
+                    <li id="menu-item" class="menu-item menu-item-type-post_type menu-item-object-page">
+                        <a title="管理后台" href="http://localhost/xml-news/public/index.php/panel/index/index">管理后台</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</nav>
+
+<div class="container" id="main">
+    <div class="row">
+
+        <div id="blog" class="col-sm-offset-1 col-sm-8 col-sm-push-3 col-md-offset-1 col-md-8 col-md-push-3 no-gutter"
+             tabindex="-1" role="main">
+
+            <!--新闻数据列表-->
+            {volist name='news_data' id='news_data'}
+            <div id="post" class="post type-post status-publish format-standard hentry category-life">
+
+                <div class="info">
+                    <a class="category" style="padding-top:3px"
+                       href="/xml-news/public/index/index/lists?lists_id={$news_data.lists_id}">{$news_data.lists_name}</a>
+                </div>
+
+                <h3 class="title">
+                    <a href="/xml-news/public/index/index/news?news_id={$news_data.id}">{$news_data.title}</a>
+                </h3>
+
+                <div class="entry-content">
+                    <blockquote>{$news_data.summary}</blockquote>
+                    <p>
+                        <a href="/xml-news/public/index/index/news?news_id={$news_data.id}" class="more-link">继续阅读
+                            <span class="meta-nav">→</span>
+                        </a>
+                    </p>
+                </div>
+                <!-- .entry-content -->
+            </div>
+            {/volist}
+            <!-- #post-## -->
+
+        </div><!-- #blog -->
+
+        <div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-9 no-gutter" role="complementary">
+            <div id="search-2" class="widget widget_search">
+                <form method="get" id="searchform" class="form-inline" action="http://localhost/xml-news/public/index/index/search" role="search">
+                    <div class="form-group">
+                        <label for="s" class="sr-only">Search</label>
+                        <input type="search" class="form-control" name="keyword" id="s">
+                    </div>
+                    <input type="submit" class="btn btn-default" value="Search">
+                </form>
+            </div>
+            <div id="categories-2" class="widget widget_categories">
+                <h4 class="title text-center">分类目录</h4>
+                {volist name='lists_data' id='lists_data'}
+                <ul>
+                    <li class="cat-item">
+                        <a href="/xml-news/public/index/index/lists?lists_id={$lists_data.id}">{$lists_data.name}</a>
+                        ({$lists_data.news_num})
+                    </li>
+                </ul>
+                {/volist}
+            </div>
+        </div>
+        <!-- #sidebar -->
+
+
+    </div><!-- .row -->
+</div><!-- #wrapper -->
+
+<footer class="footer">
+    <div class="container-fluid" id="copyright">
+        <p class="text-center">
+            XML新闻网站 - ©️2019 Powered By Token丶Felix
+        </p>
+    </div>
+</footer>
+
+<script type="text/javascript" src="__INDEX_JS__/highlight.pack.js"></script>
+<script type="text/javascript" src="__INDEX_JS__/jquery.min.js"></script>
+<script type="text/javascript" src="__INDEX_JS__/katex.min.js"></script>
+<script type="text/javascript" src="__INDEX_JS__/emojify.min.js"></script>
+<script type="text/javascript" src="__INDEX_JS__/clipboard.min.js"></script>
+<script type="text/javascript" src="__INDEX_JS__/prism-core.min.js"></script>
+<script type="text/javascript" src="__INDEX_JS__/prism-autoloader.min.js"></script>
+<script type="text/javascript" src="__INDEX_JS__/prism-toolbar.min.js"></script>
+<script type="text/javascript" src="__INDEX_JS__/prism-line-numbers.min.js"></script>
+<script type="text/javascript" src="__INDEX_JS__/prism-show-language.min.js"></script>
+<script type="text/javascript" src="__INDEX_JS__/prism-copy-to-clipboard.min.js"></script>
 
 </body>
 </html>
