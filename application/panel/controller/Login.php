@@ -36,6 +36,9 @@ class Login extends Controller
         if ($login_user['code'] != CODE_SUCCESS) {
             return api_return(CODE_ERROR, '登录失败');
         }
+        if ($login_user['data']['status'] != 0) {
+            return api_return(CODE_ERROR, '该账号已被封禁');
+        }
         $panel_user['username'] = $username;
         $panel_user['password'] = $password;
         $panel_user['realname'] = $login_user['data']['realname'];
